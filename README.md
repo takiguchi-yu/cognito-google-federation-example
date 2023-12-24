@@ -24,9 +24,11 @@ sequenceDiagram
 
 ## Technology Stack
 
-- cdk with typescript
-- backend nodejs with typescript
-- frontend react with typescript
+- Frontend
+  - language: typescript
+  - styling: tailwindcss
+  - library: react
+  - build tool: vite
 
 ## Getting Started
 

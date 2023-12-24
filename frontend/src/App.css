@@ -1,0 +1,9 @@
+.loading {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: -0.25rem;
+  margin-right: 0.75rem;
+  border-radius: 50%;
+  border: 0.25rem solid rgba(255, 255, 255, 0.2);
+  border-top-color: rgb(255, 255, 255);
+}

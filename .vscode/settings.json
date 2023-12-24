@@ -1,0 +1,15 @@
+{
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": ["source.addMissingImports", "source.fixAll.eslint", "source.organizeImports"],
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "[go]": {
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "golang.go"
+  }
+}
