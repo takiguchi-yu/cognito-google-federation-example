@@ -2,9 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import * as cognito from 'aws-cdk-lib/aws-cognito';
 import { Construct } from 'constructs';
 
-export class AwsCognitoS3HostingStack extends cdk.Stack {
-  userPoolClientSecret: string;
-
+export class CognitoGoogleFederationExampleStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
