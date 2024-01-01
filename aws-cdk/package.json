@@ -1,5 +1,6 @@
 {
-  "name": "aws-cdk",
+  "name": "cognito-google-federation-example",
+  "private": true,
   "version": "0.1.0",
   "bin": {
     "aws-cdk": "bin/aws-cdk.js"
@@ -7,18 +8,21 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.11",
-    "@types/node": "20.10.5",
-    "aws-cdk": "2.116.1",
+    "@types/aws-lambda": "^8.10.130",
+    "@types/node": "20.10.6",
+    "aws-cdk": "2.117.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.3.3"
   },
   "dependencies": {
-    "aws-cdk-lib": "2.116.1",
+    "@aws-sdk/client-ssm": "^3.484.0",
+    "aws-cdk-lib": "2.117.0",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1528.0",
+    "axios": "^1.6.3",
     "constructs": "^10.3.0",
     "source-map-support": "^0.5.21"
   }
