@@ -5,20 +5,15 @@ import { Spinner } from './components/Spinner'
 export default function App() {
   const baseUrl = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5173/dev/'
   const [email, setEmail] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    console.log(baseUrl);
-
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
     if (params && params.code) {
-      setIsLoading(true)
       const url = new URL(`${baseUrl}/auth/token`);
       url.searchParams.append('code', params.code);
-      console.log(url.toString());
-
       fetch(url.toString())
         .then(result => result.json())
         .then(result => result.data.id_token)
@@ -30,12 +25,13 @@ export default function App() {
         .then(result => result.json())
         .then(result => {
           setEmail(result.user.claims.email);
-          setIsLoading(false);
         })
         .catch(error => {
           console.error('There was a problem with the fetch operation:', error);
           setIsLoading(false)
         });
+    } else {
+      setIsLoading(false)
     }
   }, [baseUrl])
 

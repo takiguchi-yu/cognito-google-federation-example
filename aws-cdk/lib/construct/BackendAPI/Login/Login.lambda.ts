@@ -19,5 +19,11 @@ export const handler: APIGatewayProxyHandler = async () => {
     body: JSON.stringify({
       login_url: url.toString(),
     }),
+    // localhost から実行する場合は適切に CORS を設定する
+    // headers: {
+    //   "Access-Control-Allow-Headers": "*",
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Allow-Methods": "*",
+    // },
   };
 };
