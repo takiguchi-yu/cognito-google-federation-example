@@ -3,31 +3,62 @@ import './App.css'
 import { Spinner } from './components/Spinner'
 
 export default function App() {
-  const baseUrl = import.meta.env.VITE_APP_BASE_URL || 'http://localhost/dev/'
+  const baseUrl = import.meta.env.VITE_APP_BASE_URL || 'http://localhost:5173/dev/'
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    console.log(baseUrl);
+
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
     if (params && params.code) {
-      setIsLoading(true);
-      // TODO: tokenAPI && userAPI を呼び出してデータを取得する
-      setTimeout(() => {
-        setEmail('test@example.com')
-        setIsLoading(false)
-      }, 5000);
+      setIsLoading(true)
+      const url = new URL(`${baseUrl}/auth/token`);
+      url.searchParams.append('code', params.code);
+      console.log(url.toString());
+
+      fetch(url.toString())
+        .then(result => result.json())
+        .then(result => result.data.id_token)
+        .then(idToken => fetch(`${baseUrl}/user`, {
+          headers: {
+            'Authorization': `Bearer ${idToken}`,
+          },
+        }))
+        .then(result => result.json())
+        .then(result => {
+          setEmail(result.user.claims.email);
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+          setIsLoading(false)
+        });
     }
   }, [baseUrl])
 
   const attemptLogin = () => {
     setIsLoading(true)
-    // TODO: loginAPIを呼び出してデータを取得する
-    setTimeout(() => {
-      setEmail('test@example.com')
-      setIsLoading(false)
-    }, 3000);
+    fetch(`${baseUrl}/auth/login`)
+      .then(result => {
+        if (!result.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return result.json();
+      })
+      .then(result => {
+        if (result.login_url) {
+          window.location.href = result.login_url;
+          return;
+        }
+        alert('Login URL not returned from backend!');
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        setIsLoading(false)
+      });
   }
 
   return (
