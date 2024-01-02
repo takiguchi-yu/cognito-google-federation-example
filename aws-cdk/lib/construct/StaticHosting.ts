@@ -25,13 +25,13 @@ export class StaticHosting extends Construct {
     this.distribution = new cloudfront.Distribution(this, "Distribution", {
       defaultRootObject: "index.html",
       priceClass: cloudfront.PriceClass.PRICE_CLASS_200,
-      errorResponses: [
-        {
-          httpStatus: 404,
-          responsePagePath: "/index.html",
-          responseHttpStatus: 200,
-        },
-      ],
+      // errorResponses: [
+      //   {
+      //     httpStatus: 404,
+      //     responsePagePath: "/index.html",
+      //     responseHttpStatus: 200,
+      //   },
+      // ],
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       defaultBehavior: {
         origin: origin,
